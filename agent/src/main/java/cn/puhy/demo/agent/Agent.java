@@ -11,5 +11,6 @@ public class Agent {
     public static void premain(String arg, Instrumentation instrumentation) {
         instrumentation.addTransformer(new WebClassFileTransformer());
         instrumentation.addTransformer(new DubboConsumerClassFileTransformer());
+        instrumentation.addTransformer(new DubboProviderClassFileTransformer());
     }
 }

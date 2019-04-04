@@ -1,10 +1,14 @@
 package cn.puhy.demo.agent;
 
 import javassist.*;
+import org.slf4j.MDC;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author PUHY
@@ -35,5 +39,22 @@ public class WebClassFileTransformer implements ClassFileTransformer {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void begin(Object args[]) {
+        HttpServletRequest request = (HttpServletRequest) args[0];
+        String traceId = request.getHeader("traceId");
+        String eventId;
+        if (traceId == null || traceId.equals("")) {
+            traceId = UUID.randomUUID().toString();
+            eventId = traceId;
+        } else {
+            eventId = UUID.randomUUID().toString();
+        }
+        String parentEventId = Optional.of(request.getHeader("eventId")).orElse(traceId);
+        TraceSession traceSession = new TraceSession(traceId, eventId, parentEventId);
+
+        MDC.put("traceId", traceId);
+        MDC.put("eventId", eventId);
     }
 }

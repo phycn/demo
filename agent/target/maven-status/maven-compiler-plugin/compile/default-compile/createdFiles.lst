@@ -1,0 +1,5 @@
+cn\puhy\demo\agent\WebClassFileTransformer.class
+cn\puhy\demo\agent\Agent.class
+cn\puhy\demo\agent\DubboConsumerClassFileTransformer$DubboInfo.class
+cn\puhy\demo\agent\DubboConsumerClassFileTransformer.class
+cn\puhy\demo\agent\DubboProviderClassFileTransformer.class
