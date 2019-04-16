@@ -1,4 +1,6 @@
-package cn.puhy.demo.geo;
+package cn.puhy.demo.geo.algorithm;
+
+import java.util.Arrays;
 
 public class GeoInfo {
 

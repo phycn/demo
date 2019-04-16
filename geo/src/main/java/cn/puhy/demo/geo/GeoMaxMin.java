@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GeoMaxMin {
     public static void main(String[] args) throws IOException {
-        String filePath = "C:\\Users\\puhongyu\\Desktop\\geo\\yaan.txt";
+        String filePath = "C:\\Users\\puhongyu\\Desktop\\geo\\chengdu.txt";
         List<String> lines = Files.readAllLines(Paths.get(filePath));
         String[] lonLats = lines.get(0).split(";");
         double[] lons = new double[lonLats.length];
