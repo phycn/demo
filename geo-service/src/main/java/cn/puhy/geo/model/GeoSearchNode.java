@@ -3,11 +3,11 @@ package cn.puhy.geo.model;
 import java.util.List;
 
 public class GeoSearchNode implements Comparable<GeoSearchNode> {
-    private String code;
-    private int pointOrSection;
-    private int lonOrLat;
-    private int maxOrMin;
-    private double value;
+    private String code;            // 城市编码
+    private int pointOrSection;     // 点或者区间
+    private int lonOrLat;           // 经度或纬度
+    private int maxOrMin;           // 最大值或最小值
+    private double value;           // 经度值或纬度值
     private List<String> codeRange;
 
     public String getCode() {

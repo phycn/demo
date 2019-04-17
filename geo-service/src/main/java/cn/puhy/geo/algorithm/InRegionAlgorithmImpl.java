@@ -5,6 +5,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class InRegionAlgorithmImpl implements InRegionAlgorithm {
 
+    /**
+     * 判断坐标点是否在区域内
+     *
+     * @param lons 经度边界点
+     * @param lats 纬度边界点
+     * @param lon  坐标经度
+     * @param lat  坐标纬度
+     * @return
+     */
     @Override
     public boolean inRegion(double[] lons, double[] lats, double lon, double lat) {
         int count = lons.length;

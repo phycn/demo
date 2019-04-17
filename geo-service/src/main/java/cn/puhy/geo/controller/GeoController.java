@@ -14,6 +14,9 @@ public class GeoController {
 
     @GetMapping("/geo/{lon}/{lat}")
     public String getCityCode(@PathVariable("lon") double lon, @PathVariable("lat") double lat) {
-        return geoService.getCode(lon, lat);
+        long start = System.currentTimeMillis();
+        String code = geoService.getCode(lon, lat);
+        System.out.println(System.currentTimeMillis() - start);
+        return code;
     }
 }

@@ -35,6 +35,7 @@ public class PointSectionGeoStrategy implements GeoStrategy {
         List<String> latRange = determineRange(latNodes, lat);
         // 两个范围的交集
         lonRange.retainAll(latRange);
+        // 交集为空说明不在已知城市内
         if (lonRange.size() == 0) {
             return "";
         }
@@ -51,7 +52,7 @@ public class PointSectionGeoStrategy implements GeoStrategy {
     }
 
     /**
-     * 确定经度或纬度会在哪些城市内
+     * 确定经度或纬度会在哪些城市内，目前采用遍历数组方式，后续可以优化为使用AVL树
      *
      * @param nodes
      * @param value

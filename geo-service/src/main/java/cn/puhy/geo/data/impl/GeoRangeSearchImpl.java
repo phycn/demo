@@ -13,6 +13,12 @@ import java.util.stream.Collectors;
 @Component
 public class GeoRangeSearchImpl implements GeoRangeSearch {
 
+    /**
+     * 构造
+     * @param geoInfos
+     * @param lonOrLat
+     * @return
+     */
     @Override
     public List<GeoSearchNode> generateGeoSearchNodes(List<GeoInfo> geoInfos, int lonOrLat) {
         List<GeoSearchNode> temp = new ArrayList<>();
@@ -65,7 +71,6 @@ public class GeoRangeSearchImpl implements GeoRangeSearch {
                 sectionNode.setLonOrLat(pointNode.getLonOrLat());
                 geoSearchNodes.add(sectionNode);
             }
-
         }
         return geoSearchNodes;
     }

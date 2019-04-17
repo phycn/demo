@@ -2,14 +2,14 @@ package cn.puhy.geo.model;
 
 public class GeoInfo {
 
-    private String name;
-    private String code;
-    private double maxLon;
-    private double minLon;
-    private double maxLat;
-    private double minLat;
-    private double[] borderLons;
-    private double[] borderLats;
+    private String name;            // 城市名称
+    private String code;            // 城市编码
+    private double maxLon;          // 最大经度
+    private double minLon;          // 最小经度
+    private double maxLat;          // 最大纬度
+    private double minLat;          // 最小纬度
+    private double[] borderLons;    // 经度边界值
+    private double[] borderLats;    // 纬度边界值
 
     public String getName() {
         return name;
