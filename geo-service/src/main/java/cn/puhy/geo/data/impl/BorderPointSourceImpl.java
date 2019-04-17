@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BorderPointSourceImpl implements BorderPointSource {
@@ -17,15 +19,15 @@ public class BorderPointSourceImpl implements BorderPointSource {
     private String dirPath = "C:\\Users\\puhongyu\\Desktop\\geo";
 
     @Override
-    public GeoInfo[] generateGeoInfos() {
+    public Map<String, GeoInfo> generateGeoInfoMap() {
         File dirFile = new File(dirPath);
         File[] files = dirFile.listFiles();
-        GeoInfo[] geoInfos = new GeoInfo[files.length];
-        for (int i = 0; i < files.length; i++) {
-            GeoInfo geoInfo = generateGeoInfo(files[i].getAbsolutePath());
-            geoInfos[i] = geoInfo;
+        Map<String, GeoInfo> map = new HashMap<>();
+        for (File file : files) {
+            GeoInfo geoInfo = generateGeoInfo(file.getAbsolutePath());
+            map.put(file.getName(), geoInfo);
         }
-        return geoInfos;
+        return map;
     }
 
     private GeoInfo generateGeoInfo(String filePath) {
@@ -55,8 +57,9 @@ public class BorderPointSourceImpl implements BorderPointSource {
         geoInfo.setMaxLon(Arrays.stream(lons).max().orElse(0));
         geoInfo.setMinLon(Arrays.stream(lons).min().orElse(0));
         geoInfo.setMaxLat(Arrays.stream(lats).max().orElse(0));
-        geoInfo.setMinLon(Arrays.stream(lats).min().orElse(0));
+        geoInfo.setMinLat(Arrays.stream(lats).min().orElse(0));
         geoInfo.setName(Paths.get(filePath).getFileName().toString());
+        geoInfo.setCode(Paths.get(filePath).getFileName().toString());
         return geoInfo;
     }
 }

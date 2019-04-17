@@ -43,12 +43,30 @@ public class GeoRangeSearchImpl implements GeoRangeSearch {
             temp.add(maxGeoSearchNode);
             temp.add(minGeoSearchNode);
         }
+        // 点排序
         temp = temp.stream().sorted().collect(Collectors.toList());
         List<GeoSearchNode> geoSearchNodes = new ArrayList<>();
-        for (int i = 1, length = temp.size(); i < length; i++) {
+        // 区间
+        List<String> section = new ArrayList<>();
+        for (int i = 0, length = temp.size(); i < length; i++) {
+            GeoSearchNode pointNode = temp.get(i);
+            geoSearchNodes.add(pointNode);
+            // 所有点最大的值后没有区间
+            if (i < length - 1) {
+                GeoSearchNode sectionNode = new GeoSearchNode();
+                if (pointNode.getMaxOrMin() == GeoConstants.MIN) {
+                    section.add(pointNode.getCode());
+                } else {
+                    section.remove(pointNode.getCode());
+                }
+                List<String> cloneSection = new ArrayList<>(section);
+                sectionNode.setCodeRange(cloneSection);
+                sectionNode.setPointOrSection(GeoConstants.TYPE_SECTION);
+                sectionNode.setLonOrLat(pointNode.getLonOrLat());
+                geoSearchNodes.add(sectionNode);
+            }
 
         }
-
-        return temp;
+        return geoSearchNodes;
     }
 }

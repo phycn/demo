@@ -8,7 +8,7 @@ public class GeoSearchNode implements Comparable<GeoSearchNode> {
     private int lonOrLat;
     private int maxOrMin;
     private double value;
-    private List codeRange;
+    private List<String> codeRange;
 
     public String getCode() {
         return code;
@@ -50,16 +50,28 @@ public class GeoSearchNode implements Comparable<GeoSearchNode> {
         this.value = value;
     }
 
-    public List getCodeRange() {
+    public List<String> getCodeRange() {
         return codeRange;
     }
 
-    public void setCodeRange(List codeRange) {
+    public void setCodeRange(List<String> codeRange) {
         this.codeRange = codeRange;
     }
 
     @Override
     public int compareTo(GeoSearchNode geoSearchNode) {
-        return this.value > geoSearchNode.getValue() ? 1 : 0;
+        return Double.compare(this.value, geoSearchNode.getValue());
+    }
+
+    @Override
+    public String toString() {
+        return "GeoSearchNode{" +
+                "code='" + code + '\'' +
+                ", pointOrSection=" + pointOrSection +
+                ", lonOrLat=" + lonOrLat +
+                ", maxOrMin=" + maxOrMin +
+                ", value=" + value +
+                ", codeRange=" + codeRange +
+                '}';
     }
 }
