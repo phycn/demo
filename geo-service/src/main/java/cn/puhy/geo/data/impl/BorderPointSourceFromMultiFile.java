@@ -2,7 +2,7 @@ package cn.puhy.geo.data.impl;
 
 import cn.puhy.geo.model.GeoInfo;
 import cn.puhy.geo.data.BorderPointSource;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
-public class BorderPointSourceImpl implements BorderPointSource {
+@Component("borderPointSourceFromMultiFile")
+public class BorderPointSourceFromMultiFile implements BorderPointSource {
 
     private String dirPath = "C:\\Users\\puhongyu\\Desktop\\geo";
 

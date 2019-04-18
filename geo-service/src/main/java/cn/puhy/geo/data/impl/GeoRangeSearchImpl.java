@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class GeoRangeSearchImpl implements GeoRangeSearch {
 
     /**
-     * 构造
+     * 构造搜索节点
      * @param geoInfos
      * @param lonOrLat
      * @return

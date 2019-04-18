@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class GeoToDB {
     public static void main(String[] args) throws IOException, SQLException {
-        List<String> list = Files.readAllLines(Paths.get("C:\\Users\\PUHY\\Desktop\\geo-3.txt"));
+        List<String> list = Files.readAllLines(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo-3.txt"));
         JSONArray jsonArray = JSONArray.parseArray(list.get(0));
 
         Connection connection = DBUtil.getConn();
