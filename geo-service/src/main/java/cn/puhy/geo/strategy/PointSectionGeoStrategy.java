@@ -52,7 +52,7 @@ public class PointSectionGeoStrategy implements GeoStrategy {
     }
 
     /**
-     * 确定经度或纬度会在哪些城市内，目前采用遍历数组方式，后续可以优化为使用AVL树
+     * 确定经度或纬度会在哪些城市内
      *
      * @param nodes
      * @param value
@@ -61,6 +61,7 @@ public class PointSectionGeoStrategy implements GeoStrategy {
     private List<String> determineRange(List<GeoSearchNode> nodes, double value) {
         List<String> range = new ArrayList<>();
         // 索引为偶数的是点，奇数是区间
+        // TODO 可以优化为AVL树，目前为遍历数组
         for (int i = 0, length = nodes.size(); i < length; i += 2) {
             GeoSearchNode node = nodes.get(i);
             // 相等说明是在边界点上

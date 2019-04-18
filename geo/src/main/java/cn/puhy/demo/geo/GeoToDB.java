@@ -18,41 +18,35 @@ import java.util.List;
  */
 public class GeoToDB {
     public static void main(String[] args) throws IOException, SQLException {
-        List<String> list = Files.readAllLines(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo.txt"));
+        List<String> list = Files.readAllLines(Paths.get("C:\\Users\\PUHY\\Desktop\\geo-3.txt"));
         JSONArray jsonArray = JSONArray.parseArray(list.get(0));
 
-//        Connection connection = getConn();
-//        String sql = "insert into geo (name,p,r,lng,lat) values(?,?,?,?,?)";
-//        PreparedStatement pstmt = connection.prepareStatement(sql);
+        Connection connection = DBUtil.getConn();
+        String sql = "insert into geo (name,lon,lat) values(?,?,?)";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
 
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONArray array = jsonArray.getJSONObject(i).getJSONArray("geo");
             String name = jsonArray.getJSONObject(i).getString("name");
-            if (name.equals("酒泉市")) {
-                System.out.println(array.size());
-                continue;
-            }
-//            System.out.println(array);
-//            for (int j = 0; j < array.size(); j++) {
-//
-//                JSONObject jsonObject = array.getJSONObject(j);
-//
+            System.out.println(array);
+            for (int j = 0; j < array.size(); j++) {
+
+                JSONObject jsonObject = array.getJSONObject(j);
+
 //                String p = jsonObject.getString("P");
 //                String r = jsonObject.getString("R");
-//                String lng = jsonObject.getString("lng");
-//                String lat = jsonObject.getString("lat");
-//
-//                pstmt.setString(1, name);
-//                pstmt.setString(2, p);
-//                pstmt.setString(3, r);
-//                pstmt.setString(4, lng);
-//                pstmt.setString(5, lat);
-//
-//                pstmt.executeUpdate();
-//
-//            }
+                String lon = jsonObject.getString("lng");
+                String lat = jsonObject.getString("lat");
+
+                pstmt.setString(1, name);
+                pstmt.setString(2, lon);
+                pstmt.setString(3, lat);
+
+                pstmt.executeUpdate();
+
+            }
         }
-//        pstmt.close();
-//        connection.close();
+        pstmt.close();
+        connection.close();
     }
 }
