@@ -1,31 +1,13 @@
 package cn.puhy.geo.model;
 
-public class GeoInfo {
+public class GeoInfo extends GeoBase {
 
-    private String name;            // 城市名称
-    private String code;            // 城市编码
     private double maxLon;          // 最大经度
     private double minLon;          // 最小经度
     private double maxLat;          // 最大纬度
     private double minLat;          // 最小纬度
     private double[] borderLons;    // 经度边界值
     private double[] borderLats;    // 纬度边界值
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public double getMaxLon() {
         return maxLon;
@@ -78,8 +60,8 @@ public class GeoInfo {
     @Override
     public String toString() {
         return "GeoInfo{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
+                "name='" + getName() + '\'' +
+                ", code='" + getCode() + '\'' +
                 ", maxLon=" + maxLon +
                 ", minLon=" + minLon +
                 ", maxLat=" + maxLat +

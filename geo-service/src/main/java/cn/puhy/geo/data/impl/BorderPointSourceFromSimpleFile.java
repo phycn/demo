@@ -2,6 +2,9 @@ package cn.puhy.geo.data.impl;
 
 import cn.puhy.geo.data.BorderPointSource;
 import cn.puhy.geo.model.GeoInfo;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,13 +22,15 @@ import java.util.Map;
 @Component("borderPointSourceFromSimpleFile")
 public class BorderPointSourceFromSimpleFile implements BorderPointSource {
 
-    private String filePath = "/Users/puhongyu/phy/tmp/geo-simple.txt";
+    @Value("${geo.simple.filepath}")
+    private String filePath;
 
     @Override
     public Map<String, GeoInfo> generateGeoInfoMap() {
         Map<String, GeoInfo> map = new HashMap<>();
         try {
-            List<String> lines = Files.readAllLines(Paths.get(filePath));
+            Resource resource = new ClassPathResource(filePath);
+            List<String> lines = Files.readAllLines(Paths.get(resource.getFile().getAbsolutePath()));
             for (String line : lines) {
                 String[] point = line.split("\\|");
                 String name = point[0];

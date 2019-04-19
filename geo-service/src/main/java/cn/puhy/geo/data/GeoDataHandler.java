@@ -3,6 +3,8 @@ package cn.puhy.geo.data;
 import cn.puhy.geo.constant.GeoConstants;
 import cn.puhy.geo.model.GeoInfo;
 import cn.puhy.geo.model.GeoSearchNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,8 @@ import java.util.Map;
 @Component
 public class GeoDataHandler {
 
+    private static Logger logger = LoggerFactory.getLogger(GeoDataHandler.class);
+
     @Autowired
     @Qualifier("borderPointSourceFromSimpleFile")
     private BorderPointSource borderPointSource;
@@ -24,10 +28,10 @@ public class GeoDataHandler {
 
     @Bean("geoInfoMap")
     public Map<String, GeoInfo> geoInfoMap() {
-        System.out.println("地图边界点信息加载开始...");
+        logger.info("地图边界点信息加载开始...");
         long start = System.currentTimeMillis();
         Map<String, GeoInfo> map = borderPointSource.generateGeoInfoMap();
-        System.out.println("地图边界点信息加载完成, 耗时: " + (System.currentTimeMillis() - start));
+        logger.info("地图边界点信息加载完成, 耗时: " + (System.currentTimeMillis() - start));
         return map;
     }
 

@@ -2,22 +2,13 @@ package cn.puhy.geo.model;
 
 import java.util.List;
 
-public class GeoSearchNode implements Comparable<GeoSearchNode> {
+public class GeoSearchNode extends GeoBase implements Comparable<GeoSearchNode> {
 
-    private String code;            // 城市编码
     private int pointOrSection;     // 点或者区间
     private int lonOrLat;           // 经度或纬度
     private int maxOrMin;           // 最大值或最小值
     private double value;           // 经度值或纬度值
     private List<String> codeRange;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public int getPointOrSection() {
         return pointOrSection;
@@ -67,7 +58,7 @@ public class GeoSearchNode implements Comparable<GeoSearchNode> {
     @Override
     public String toString() {
         return "GeoSearchNode{" +
-                "code='" + code + '\'' +
+                "code='" + getCode() + '\'' +
                 ", pointOrSection=" + pointOrSection +
                 ", lonOrLat=" + lonOrLat +
                 ", maxOrMin=" + maxOrMin +

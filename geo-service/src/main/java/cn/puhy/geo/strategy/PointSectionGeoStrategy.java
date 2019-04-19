@@ -1,6 +1,7 @@
 package cn.puhy.geo.strategy;
 
 import cn.puhy.geo.algorithm.InRegionAlgorithm;
+import cn.puhy.geo.model.GeoBase;
 import cn.puhy.geo.model.GeoInfo;
 import cn.puhy.geo.model.GeoSearchNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,25 +31,26 @@ public class PointSectionGeoStrategy implements GeoStrategy {
     private InRegionAlgorithm inRegionAlgorithm;
 
     @Override
-    public String getCode(double lon, double lat) {
+    public GeoBase getCode(double lon, double lat) {
+        GeoBase geoBase = new GeoBase();
         List<String> lonRange = determineRange(lonNodes, lon);
         List<String> latRange = determineRange(latNodes, lat);
         // 两个范围的交集
         lonRange.retainAll(latRange);
         // 交集为空说明不在已知城市内
         if (lonRange.size() == 0) {
-            return "";
+            return geoBase;
         }
-        String cityCode = "";
         for (String code : lonRange) {
             GeoInfo geoInfo = geoInfoMap.get(code);
             boolean inRegion = inRegionAlgorithm.inRegion(geoInfo.getBorderLons(), geoInfo.getBorderLats(), lon, lat);
             if (inRegion) {
-                cityCode = code;
+                geoBase.setCode(code);
+                geoBase.setName(geoInfo.getName());
                 break;
             }
         }
-        return cityCode;
+        return geoBase;
     }
 
     /**
