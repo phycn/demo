@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GenFile {
 
-    private static String filePath = "C:\\Users\\puhongyu\\Desktop\\geo-1.txt";
+    private static String filePath = "/Users/puhongyu/phy/tmp/geo-3.txt";
 
     public static void main(String[] args) throws IOException {
         List<String> lines = new LinkedList<>();
@@ -37,12 +37,13 @@ public class GenFile {
                         stringBuilder.append("|");
                     }
                 }
-                String line = name + "|" + stringBuilder.toString();
+                String code = CityCode.getCode(name);
+                String line = name + "|" + code + "|" + stringBuilder.toString();
                 lines.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Files.write(Paths.get("C:\\Users\\puhongyu\\Desktop\\1.txt"), lines);
+        Files.write(Paths.get("/Users/puhongyu/phy/tmp/3.txt"), lines);
     }
 }

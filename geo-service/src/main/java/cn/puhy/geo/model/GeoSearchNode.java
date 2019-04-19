@@ -3,6 +3,7 @@ package cn.puhy.geo.model;
 import java.util.List;
 
 public class GeoSearchNode implements Comparable<GeoSearchNode> {
+
     private String code;            // 城市编码
     private int pointOrSection;     // 点或者区间
     private int lonOrLat;           // 经度或纬度

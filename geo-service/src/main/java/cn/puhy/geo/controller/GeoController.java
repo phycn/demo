@@ -23,7 +23,7 @@ public class GeoController {
     }
 
     @GetMapping("/geo1")
-    public void multiThread() throws InterruptedException {
+    public void multiThread() {
         double[] lons = {126.5358, 104.77844, 114.30525, 126.96932, 97.1783638};
         double[] lats = {45.80216, 29.3392, 30.59276, 46.65246, 31.1413499049};
         Random random = new Random();

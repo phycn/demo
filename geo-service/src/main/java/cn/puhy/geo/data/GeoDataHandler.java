@@ -16,7 +16,7 @@ import java.util.Map;
 public class GeoDataHandler {
 
     @Autowired
-    @Qualifier("borderPointSourceFromSingleFile")
+    @Qualifier("borderPointSourceFromSimpleFile")
     private BorderPointSource borderPointSource;
 
     @Autowired
@@ -31,22 +31,25 @@ public class GeoDataHandler {
         return map;
     }
 
+    @Bean("geoInfos")
+    public List<GeoInfo> geoInfos(Map<String, GeoInfo> geoInfoMap) {
+        return new ArrayList<>(geoInfoMap.values());
+    }
+
     @Bean("lonNodes")
-    public List<GeoSearchNode> lonNodes(Map<String, GeoInfo> geoInfoMap) {
-        List<GeoInfo> list = new ArrayList<>(geoInfoMap.values());
+    public List<GeoSearchNode> lonNodes(List<GeoInfo> geoInfos) {
         System.out.println("经度范围搜索初始化开始...");
         long start = System.currentTimeMillis();
-        List<GeoSearchNode> geoSearchNodeList = geoRangeSearch.generateGeoSearchNodes(list, GeoConstants.LON);
+        List<GeoSearchNode> geoSearchNodeList = geoRangeSearch.generateGeoSearchNodes(geoInfos, GeoConstants.LON);
         System.out.println("经度范围搜索初始化完成, 耗时: " + (System.currentTimeMillis() - start));
         return geoSearchNodeList;
     }
 
     @Bean("latNodes")
-    public List<GeoSearchNode> latNodes(Map<String, GeoInfo> geoInfoMap) {
-        List<GeoInfo> list = new ArrayList<>(geoInfoMap.values());
+    public List<GeoSearchNode> latNodes(List<GeoInfo> geoInfos) {
         System.out.println("经度范围搜索初始化开始...");
         long start = System.currentTimeMillis();
-        List<GeoSearchNode> geoSearchNodeList = geoRangeSearch.generateGeoSearchNodes(list, GeoConstants.LAT);
+        List<GeoSearchNode> geoSearchNodeList = geoRangeSearch.generateGeoSearchNodes(geoInfos, GeoConstants.LAT);
         System.out.println("经度范围搜索初始化完成, 耗时: " + (System.currentTimeMillis() - start));
         return geoSearchNodeList;
     }
