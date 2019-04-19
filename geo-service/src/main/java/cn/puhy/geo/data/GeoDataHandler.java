@@ -38,19 +38,11 @@ public class GeoDataHandler {
 
     @Bean("lonNodes")
     public List<GeoSearchNode> lonNodes(List<GeoInfo> geoInfos) {
-        System.out.println("经度范围搜索初始化开始...");
-        long start = System.currentTimeMillis();
-        List<GeoSearchNode> geoSearchNodeList = geoRangeSearch.generateGeoSearchNodes(geoInfos, GeoConstants.LON);
-        System.out.println("经度范围搜索初始化完成, 耗时: " + (System.currentTimeMillis() - start));
-        return geoSearchNodeList;
+        return geoRangeSearch.generateGeoSearchNodes(geoInfos, GeoConstants.LON);
     }
 
     @Bean("latNodes")
     public List<GeoSearchNode> latNodes(List<GeoInfo> geoInfos) {
-        System.out.println("经度范围搜索初始化开始...");
-        long start = System.currentTimeMillis();
-        List<GeoSearchNode> geoSearchNodeList = geoRangeSearch.generateGeoSearchNodes(geoInfos, GeoConstants.LAT);
-        System.out.println("经度范围搜索初始化完成, 耗时: " + (System.currentTimeMillis() - start));
-        return geoSearchNodeList;
+        return geoRangeSearch.generateGeoSearchNodes(geoInfos, GeoConstants.LAT);
     }
 }
