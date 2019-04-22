@@ -1,9 +1,10 @@
-package cn.puhy.geo.strategy;
+package cn.puhy.geo.strategy.impl;
 
 import cn.puhy.geo.algorithm.InRegionAlgorithm;
 import cn.puhy.geo.model.GeoBase;
 import cn.puhy.geo.model.GeoInfo;
 import cn.puhy.geo.model.GeoSearchNode;
+import cn.puhy.geo.strategy.GeoStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

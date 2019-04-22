@@ -1,5 +1,6 @@
-package cn.puhy.geo.algorithm;
+package cn.puhy.geo.algorithm.impl;
 
+import cn.puhy.geo.algorithm.InRegionAlgorithm;
 import org.springframework.stereotype.Component;
 
 @Component
