@@ -77,7 +77,7 @@ public class PointSectionGeoStrategy implements GeoStrategy {
                 if (i == 0) {
                     break;
                 }
-                range = nodes.get(i - 1).getCodeRange();
+                range.addAll(nodes.get(i - 1).getCodeRange());
                 break;
             }
             // 大于最大值说明不在范围内
