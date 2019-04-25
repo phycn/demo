@@ -48,7 +48,8 @@ public class PointSectionGeoStrategy implements GeoStrategy {
             if (inRegion) {
                 geoBase.setCode(code);
                 geoBase.setName(geoInfo.getName());
-                break;
+//                break;
+                System.out.println(geoInfo.getName());
             }
         }
         return geoBase;

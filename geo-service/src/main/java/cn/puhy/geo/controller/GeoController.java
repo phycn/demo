@@ -24,4 +24,14 @@ public class GeoController {
         logger.info("判断耗时: " + (System.currentTimeMillis() - start));
         return geoBase;
     }
+
+    @GetMapping("/geo1/{lonlat}")
+    public GeoBase getCityCode1(@PathVariable("lonlat") String lonlat) {
+        double lon = Double.parseDouble(lonlat.split(",")[1]);
+        double lat = Double.parseDouble(lonlat.split(",")[0]);
+        long start = System.currentTimeMillis();
+        GeoBase geoBase = geoService.getCode(lon, lat);
+        logger.info("判断耗时: " + (System.currentTimeMillis() - start));
+        return geoBase;
+    }
 }

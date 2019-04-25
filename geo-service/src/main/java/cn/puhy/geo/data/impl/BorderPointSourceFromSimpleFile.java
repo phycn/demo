@@ -7,12 +7,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,8 +30,11 @@ public class BorderPointSourceFromSimpleFile implements BorderPointSource {
         Map<String, GeoInfo> map = new HashMap<>();
         try {
             Resource resource = new ClassPathResource(filePath);
-            List<String> lines = Files.readAllLines(Paths.get(resource.getFile().getAbsolutePath()));
-            for (String line : lines) {
+            InputStream inputStream = resource.getInputStream();
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
                 String[] point = line.split("\\|");
                 String name = point[0];
                 String code = point[1];
