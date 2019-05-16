@@ -16,7 +16,7 @@ public class HttpServerController {
 
     private static Logger logger = LoggerFactory.getLogger(HttpServerController.class);
 
-    @Reference
+    @Reference(check = false)
     private DemoService demoService;
 
     @GetMapping("/method1")
