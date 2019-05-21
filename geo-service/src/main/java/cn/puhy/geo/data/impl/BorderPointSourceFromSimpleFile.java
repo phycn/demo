@@ -11,9 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author puhongyu
@@ -39,22 +37,35 @@ public class BorderPointSourceFromSimpleFile implements BorderPointSource {
                 String name = point[0];
                 String code = point[1];
                 int length = point.length;
-                double[] borderLons = new double[length - 2];
-                double[] borderLats = new double[length - 2];
+
+                List<double[]> borderLonList = new LinkedList<>();
+                List<double[]> borderLatList = new LinkedList<>();
+
                 for (int i = 2; i < length; i++) {
-                    String[] lonLat = point[i].split(",");
-                    borderLons[i - 2] = Double.parseDouble(lonLat[0]);
-                    borderLats[i - 2] = Double.parseDouble(lonLat[1]);
+                    String[] blockPoints = point[i].split(";");
+                    int blockPointsLength = blockPoints.length;
+
+                    double[] borderLons = new double[blockPointsLength];
+                    double[] borderLats = new double[blockPointsLength];
+
+                    for (int j = 0; j < blockPointsLength; j++) {
+                        String[] lonLat = blockPoints[j].split(",");
+                        borderLons[j] = Double.parseDouble(lonLat[0]);
+                        borderLats[j] = Double.parseDouble(lonLat[1]);
+                    }
+                    borderLonList.add(borderLons);
+                    borderLatList.add(borderLats);
                 }
+
                 GeoInfo geoInfo = new GeoInfo();
                 geoInfo.setCode(code);
                 geoInfo.setName(name);
-                geoInfo.setBorderLons(borderLons);
-                geoInfo.setBorderLats(borderLats);
-                geoInfo.setMaxLon(Arrays.stream(borderLons).max().orElse(0));
-                geoInfo.setMinLon(Arrays.stream(borderLons).min().orElse(0));
-                geoInfo.setMaxLat(Arrays.stream(borderLats).max().orElse(0));
-                geoInfo.setMinLat(Arrays.stream(borderLats).min().orElse(0));
+                geoInfo.setBorderLons(borderLonList);
+                geoInfo.setBorderLats(borderLatList);
+                geoInfo.setMaxLon(borderLonList.stream().flatMapToDouble(Arrays::stream).max().orElse(0));
+                geoInfo.setMinLon(borderLonList.stream().flatMapToDouble(Arrays::stream).min().orElse(0));
+                geoInfo.setMaxLat(borderLatList.stream().flatMapToDouble(Arrays::stream).max().orElse(0));
+                geoInfo.setMinLat(borderLatList.stream().flatMapToDouble(Arrays::stream).min().orElse(0));
 
                 map.put(code, geoInfo);
             }

@@ -21,7 +21,7 @@ public class CityCode {
     static {
         List<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get("/Users/puhongyu/phy/tmp/city-code.txt"));
+            lines = Files.readAllLines(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo\\city-code.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }

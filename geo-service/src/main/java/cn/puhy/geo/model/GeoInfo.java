@@ -1,13 +1,15 @@
 package cn.puhy.geo.model;
 
+import java.util.List;
+
 public class GeoInfo extends GeoBase {
 
     private double maxLon;          // 最大经度
     private double minLon;          // 最小经度
     private double maxLat;          // 最大纬度
     private double minLat;          // 最小纬度
-    private double[] borderLons;    // 经度边界值
-    private double[] borderLats;    // 纬度边界值
+    private List<double[]> borderLons;
+    private List<double[]> borderLats;
 
     public double getMaxLon() {
         return maxLon;
@@ -41,21 +43,6 @@ public class GeoInfo extends GeoBase {
         this.minLat = minLat;
     }
 
-    public double[] getBorderLons() {
-        return borderLons;
-    }
-
-    public void setBorderLons(double[] borderLons) {
-        this.borderLons = borderLons;
-    }
-
-    public double[] getBorderLats() {
-        return borderLats;
-    }
-
-    public void setBorderLats(double[] borderLats) {
-        this.borderLats = borderLats;
-    }
 
     @Override
     public String toString() {
@@ -66,8 +53,24 @@ public class GeoInfo extends GeoBase {
                 ", minLon=" + minLon +
                 ", maxLat=" + maxLat +
                 ", minLat=" + minLat +
-                ", borderLons.length=" + borderLons.length +
-                ", borderLats.length=" + borderLats.length +
+                ", borderLons.length=" + borderLons.size() +
+                ", borderLats.length=" + borderLats.size() +
                 '}';
+    }
+
+    public List<double[]> getBorderLons() {
+        return borderLons;
+    }
+
+    public void setBorderLons(List<double[]> borderLons) {
+        this.borderLons = borderLons;
+    }
+
+    public List<double[]> getBorderLats() {
+        return borderLats;
+    }
+
+    public void setBorderLats(List<double[]> borderLats) {
+        this.borderLats = borderLats;
     }
 }

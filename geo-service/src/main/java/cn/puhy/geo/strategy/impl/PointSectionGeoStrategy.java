@@ -42,14 +42,17 @@ public class PointSectionGeoStrategy implements GeoStrategy {
         if (lonRange.size() == 0) {
             return geoBase;
         }
+        tag:
         for (String code : lonRange) {
             GeoInfo geoInfo = geoInfoMap.get(code);
-            boolean inRegion = inRegionAlgorithm.inRegion(geoInfo.getBorderLons(), geoInfo.getBorderLats(), lon, lat);
-            if (inRegion) {
-                geoBase.setCode(code);
-                geoBase.setName(geoInfo.getName());
-//                break;
-                System.out.println(geoInfo.getName());
+            int blockCount = geoInfo.getBorderLons().size();
+            for (int i = 0; i < blockCount; i++) {
+                boolean inRegion = inRegionAlgorithm.inRegion(geoInfo.getBorderLons().get(i), geoInfo.getBorderLats().get(i), lon, lat);
+                if (inRegion) {
+                    geoBase.setCode(code);
+                    geoBase.setName(geoInfo.getName());
+                    break tag;
+                }
             }
         }
         return geoBase;
