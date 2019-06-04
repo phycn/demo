@@ -1,5 +1,6 @@
 package cn.puhy.geo.controller;
 
+import cn.puhy.geo.gaode.RequestGaode;
 import cn.puhy.geo.model.GeoBase;
 import cn.puhy.geo.service.GeoService;
 import org.slf4j.Logger;
@@ -17,6 +18,9 @@ public class GeoController {
     @Autowired
     private GeoService geoService;
 
+    @Autowired
+    private RequestGaode requestGaode;
+
     @GetMapping("/geo/{lon}/{lat}")
     public GeoBase getCityCode(@PathVariable("lon") double lon, @PathVariable("lat") double lat) {
         long start = System.currentTimeMillis();
@@ -33,5 +37,10 @@ public class GeoController {
         GeoBase geoBase = geoService.getCode(lon, lat);
         logger.info("判断耗时: " + (System.currentTimeMillis() - start));
         return geoBase;
+    }
+
+    @GetMapping("/gaode")
+    public void gaode() {
+        requestGaode.district1();
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GenFile {
 
-    private static String filePath = "C:\\Users\\puhongyu\\Desktop\\geo-20190517.txt";
+    private static String filePath = "C:\\Users\\puhongyu\\Desktop\\geo-20190527.txt";
 
     public static void main(String[] args) throws IOException {
         List<String> lines = new LinkedList<>();
@@ -51,6 +51,6 @@ public class GenFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Files.write(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo-sample.txt"), lines);
+        Files.write(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo-sample-20190527.txt"), lines);
     }
 }

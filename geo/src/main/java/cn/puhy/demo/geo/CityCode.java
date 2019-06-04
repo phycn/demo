@@ -21,18 +21,20 @@ public class CityCode {
     static {
         List<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo\\city-code.txt"));
+            lines = Files.readAllLines(Paths.get("C:\\Users\\puhongyu\\Desktop\\geo\\全量城市码.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         for (String line : lines) {
             String[] lineArray = line.split("\\|");
-            map.put(lineArray[0], lineArray[1]);
+            if (lineArray.length == 2) {
+                map.put(lineArray[0], lineArray[1]);
+            }
         }
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(getCode("乐山市"));
+        System.out.println(getCode("天门市"));
     }
 
     public static String getCode(String name) {
