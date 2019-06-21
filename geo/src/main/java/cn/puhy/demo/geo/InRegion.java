@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class InRegion {
 
-    private static String filePath = "C:\\Users\\puhongyu\\Desktop\\geo\\dalian.txt";
+    private static String filePath = "C:\\Users\\puhongyu\\Desktop\\tmp\\振兴区.txt";
 
     public static void main(String[] args) throws IOException {
 
@@ -37,7 +37,7 @@ public class InRegion {
                 lats[i] = Double.parseDouble(lonLatArray[1]);
             }
             // 30.6491364485,104.0487670898
-            System.out.println(inRegion(lons, lats, 121.61124, 39.012928));
+            System.out.println(inRegion(lons, lats, 124.36234, 40.09293));
         }
     }
 

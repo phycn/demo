@@ -1,5 +1,6 @@
 package cn.puhy.geo.controller;
 
+import cn.puhy.geo.gaode.Regeo;
 import cn.puhy.geo.gaode.RequestGaode;
 import cn.puhy.geo.model.GeoBase;
 import cn.puhy.geo.service.GeoService;
@@ -20,6 +21,9 @@ public class GeoController {
 
     @Autowired
     private RequestGaode requestGaode;
+
+    @Autowired
+    private Regeo regeo;
 
     @GetMapping("/geo/{lon}/{lat}")
     public GeoBase getCityCode(@PathVariable("lon") double lon, @PathVariable("lat") double lat) {
@@ -42,5 +46,17 @@ public class GeoController {
     @GetMapping("/gaode")
     public void gaode() {
         requestGaode.district1();
+    }
+
+    @GetMapping("/regeo1")
+    public void regeo1() {
+        regeo.regeo1();
+    }
+
+    @GetMapping("/regeo/{lonlat}")
+    public String regeo(@PathVariable("lonlat") String lonlat) {
+        String lon = lonlat.split(",")[1];
+        String lat = lonlat.split(",")[0];
+        return regeo.regeo(lon, lat);
     }
 }
